@@ -1,7 +1,8 @@
 
 import React, {Component} from 'react'
 
-import 'styles/index.scss';
+require('styles/index.scss');
+
 class Greeter extends Component{
   render() {
     return (

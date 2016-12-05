@@ -3,20 +3,29 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
+
 var config = Object.assign({}, base.defaultSetting, {
     entry: `${base.src}/index.js`,
     output: {
-        path: base.test,
+        path: base.dev,
         filename: `index-${base.version.replace(/\./g,'-')}.js`
     },
     plugins: [
         new HtmlWebpackPlugin({
             title: 'blogAdmin',
-            template: '../index-test.ejs'
+            template: 'index-dev.ejs'
         }),
         new webpack.HotModuleReplacementPlugin(),
         new ExtractTextPlugin(`index-${base.version.replace(/\./g,'-')}.css`)
     ],
+    devServer: {
+        contentBase: base.dev,
+        colors: true,
+        port: base.port,
+        historyApiFallback: true,
+        inline: true,
+        hot: true
+    },
     module: {
         loaders: [{
             test: /\.json$/,

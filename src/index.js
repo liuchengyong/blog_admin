@@ -1,6 +1,5 @@
 import React from 'react';
 import {render} from 'react-dom';
-import Greeter from 'components/Greeter';
 
 import { Router, Route, Link , browserHistory } from 'react-router';
 

@@ -4,7 +4,9 @@
   "description": "personly blog",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --progress",
+    "start": "sudo node server.js --env=dev",
+    "build": "webpack --env=dist",
+    "test":"webpack --env=test",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -28,6 +30,7 @@
     "imagemin-webpack-plugin": "^1.4.4",
     "json-loader": "^0.5.4",
     "node-sass": "^3.13.0",
+    "open": "0.0.5",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "react-transform-hmr": "^1.0.4",
