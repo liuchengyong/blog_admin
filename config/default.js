@@ -21,7 +21,8 @@ var defaultSetting = {
             'config': `${srcPath}/Configs/`,
             'stores': `${srcPath}/Stores`,
             'reducers': `${srcPath}/Reducers`,
-            'images': `${srcPath}/Images`
+            'images': `${srcPath}/Images`,
+            'vendors': `${srcPath}/Vendors`
         }
     }
 };

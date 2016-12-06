@@ -40,6 +40,9 @@ var config = Object.assign({}, base.defaultSetting, {
         }, {
             test: /\.scss$/,
             loader: ExtractTextPlugin.extract("style-loader", "css-loader!sass-loader")
+        }, {
+            test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/,
+            loader: 'url-loader'
         }]
     }
 });
