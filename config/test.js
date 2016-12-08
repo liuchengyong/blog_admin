@@ -12,9 +12,10 @@ var config = Object.assign({}, base.defaultSetting, {
     plugins: [
         new HtmlWebpackPlugin({
             title: 'blogAdmin',
-            template: '../index-test.ejs'
+            template: 'index-test.ejs'
         }),
         new webpack.HotModuleReplacementPlugin(),
+        new webpack.optimize.UglifyJsPlugin(),
         new ExtractTextPlugin(`index-${base.version.replace(/\./g,'-')}.css`)
     ],
     module: {

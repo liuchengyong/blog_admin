@@ -4,6 +4,8 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var webpack = require('webpack');
 
+var CompressionPlugin = require('compression-webpack-plugin');  // gzip 压缩
+
 
 var imageMinOptions = {
     test: './src/Images/**',
@@ -22,8 +24,7 @@ var htmlMinOptions = {
     "collapseWhitespace": true,
     "html5": true,
     "removeComments": true,
-    "removeEmptyAttributes": true,
-    "removeEmptyElements": true,
+    "removeEmptyAttributes": true
 };
 
 
@@ -34,6 +35,17 @@ var config = Object.assign({}, base.defaultSetting, {
         filename: `index-${base.version.replace(/\./g,'-')}.js`
     },
     plugins: [
+        new webpack.DefinePlugin({ // <-- 减少 React 大小的关键
+          'process.env': {
+            'NODE_ENV': JSON.stringify('production')
+          }
+        }),
+        new webpack.optimize.DedupePlugin(), //删除类似的重复代码
+        new webpack.optimize.UglifyJsPlugin({
+            comments:false,
+            sourceMap:false
+        }), //最小化一切
+        new webpack.optimize.AggressiveMergingPlugin(),//合并块
         new HtmlWebpackPlugin({
             title: 'blogAdmin',
             template: 'index-dist.ejs',
@@ -41,10 +53,14 @@ var config = Object.assign({}, base.defaultSetting, {
         }),
         new webpack.HotModuleReplacementPlugin(),
         new ExtractTextPlugin(`index-${base.version.replace(/\./g,'-')}.css`),
-        new webpack.optimize.UglifyJsPlugin({
-            comments:false
-        }),
-        new ImageminPlugin(imageMinOptions)
+        new ImageminPlugin(imageMinOptions),
+        new CompressionPlugin({  
+          asset: "[path]",
+          algorithm: "gzip",
+          test: /\.js$|\.css$|\.html$/,
+          threshold: 10240,
+          minRatio: 0.8
+        })
     ],
     module: {
         loaders: [{

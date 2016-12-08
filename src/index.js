@@ -16,21 +16,21 @@ import About from 'pages/About';
 // 全局css
 
 // bootstrap
-import 'vendors/bootstrap/dist/css/bootstrap.min.css';
-// Font Awesome 
-import 'vendors/font-awesome/css/font-awesome.min.css';
-// NProgress 
-import 'vendors/nprogress/nprogress.css';
-// iCheck 
-import 'vendors/iCheck/skins/flat/green.css';
-// bootstrap-progressbar 
-import 'vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css';
-// JQVMap 
-import 'vendors/jqvmap/dist/jqvmap.min.css';
-// bootstrap-daterangepicker 
-import 'vendors/bootstrap-daterangepicker/daterangepicker.css';
-// Custom Theme Style 
-import 'vendors/gentelella/css/custom.min.css';
+// import 'vendors/bootstrap/dist/css/bootstrap.min.css';
+// // Font Awesome 
+// import 'vendors/font-awesome/css/font-awesome.min.css';
+// // NProgress 
+// import 'vendors/nprogress/nprogress.css';
+// // iCheck 
+// import 'vendors/iCheck/skins/flat/green.css';
+// // bootstrap-progressbar 
+// import 'vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css';
+// // JQVMap 
+// import 'vendors/jqvmap/dist/jqvmap.min.css';
+// // bootstrap-daterangepicker 
+// import 'vendors/bootstrap-daterangepicker/daterangepicker.css';
+// // Custom Theme Style 
+// import 'vendors/gentelella/css/custom.min.css';
 
 
 let store = configureStore();
