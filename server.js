@@ -7,9 +7,8 @@ var config = require('./webpack.config');
 var open = require('open');
 
 var host = 'blog.liuchengyong.cn';
-
 new WebpackDevServer(webpack(config), config.devServer)
-    .listen(config.devServer.port, 'blog.liuchengyong.cn', (err) => {
+    .listen(config.devServer.port, host, (err) => {
         if (err) {
             console.log(err);
         }

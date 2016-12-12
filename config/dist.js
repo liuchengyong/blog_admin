@@ -55,7 +55,7 @@ var config = Object.assign({}, base.defaultSetting, {
         new ExtractTextPlugin(`index-${base.version.replace(/\./g,'-')}.css`),
         new ImageminPlugin(imageMinOptions),
         new CompressionPlugin({  
-          asset: "[path]",
+          asset: "[path].gz",
           algorithm: "gzip",
           test: /\.js$|\.css$|\.html$/,
           threshold: 10240,

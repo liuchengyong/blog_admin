@@ -1,44 +1,36 @@
 import React from 'react';
 import {render} from 'react-dom';
 
-import { Router, Route, Link , browserHistory } from 'react-router';
+import { Router, Route, browserHistory } from 'react-router';
 
 import { Provider } from 'react-redux';
 import configureStore from 'stores';
 
-import 'normalize.css';
+
+
 
 // pages 
-import Index from 'pages/Index';
-import BookList from 'pages/BookList';
-import About from 'pages/About';
+import Home from 'containers/Home';
+import BookList from 'containers/BookList';
+import About from 'containers/About';
 
 // 全局css
 
 // bootstrap
-// import 'vendors/bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.css';
 // // Font Awesome 
-// import 'vendors/font-awesome/css/font-awesome.min.css';
-// // NProgress 
-// import 'vendors/nprogress/nprogress.css';
-// // iCheck 
-// import 'vendors/iCheck/skins/flat/green.css';
-// // bootstrap-progressbar 
-// import 'vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css';
-// // JQVMap 
-// import 'vendors/jqvmap/dist/jqvmap.min.css';
-// // bootstrap-daterangepicker 
-// import 'vendors/bootstrap-daterangepicker/daterangepicker.css';
-// // Custom Theme Style 
-// import 'vendors/gentelella/css/custom.min.css';
+import 'font-awesome/css/font-awesome.css';
 
+import 'styles/index.scss';
 
 let store = configureStore();
 render((
 	<Provider store={store}>
 		<Router history={browserHistory}>
-	    	<Route path="/" component={Index}/>
+	    	<Route path="/" component={Home}/>
+	    	<Route path="/home" component={Home}/>
 	    	<Route path="/booklist" component={BookList}/>
 	    	<Route path="/about" component={About}/>
   		</Router>
   	</Provider>), document.getElementById('root'));
+

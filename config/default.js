@@ -16,7 +16,7 @@ var defaultSetting = {
         alias: {
             'styles': `${srcPath}/Styles/`,
             'components': `${srcPath}/Components/`,
-            'pages': `${srcPath}/Pages/`,
+            'containers': `${srcPath}/Containers/`,
             'actions': `${srcPath}/Actions/`,
             'config': `${srcPath}/Configs/`,
             'stores': `${srcPath}/Stores`,
