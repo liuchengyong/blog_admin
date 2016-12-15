@@ -2,24 +2,86 @@
 
 .sidebar-container{
 	position: relative;
+	padding: 15px 0 0;
 	.side-menu{
 		position: relative;
 		list-style: none;
 		margin: 0;
-		padding: 0 0 0 10px;
+		padding: 0;
 		&>li{
 			position: relative;
 		    display: block;
 		    cursor: pointer;
-		    &>a{
-		    	font-size: $font-size-base;
-		    }
-		    a {
-		    	font-size: $font-size-base-sm;
+		    &>a {
+		    	position: relative;
+		    	display: block;
 		    	color: $color-E7E7E7;
     			font-weight: 500;
+    			padding: 13px 15px 12px;
+    			&:hover{
+    				@include siderBarHoverAndActive;
+    			}
 		    }
 		}
+		&>li.active{
+			&>a{
+				border-right: 5px solid $back-color-1ABB9C;
+				@include siderBarHoverAndActive;
+			}
+			.child_menu{
+				display: block;
+			}
+		}
+	}
+	a:hover{
+		text-decoration: none;
+	}
+	.child_menu{
+		display: none;
+		padding: 0;
+		margin: 6px 0 0;
+	    list-style: none;
+	    &>li{
+	    	&:before{
+	    		position: absolute;
+	    		background: $back-color-425668;
+	    		top:50%;
+	    		left: 23px;
+			    content: "";
+			    height: 8px;
+			    width: 8px;
+			    margin-top: -4px;
+			    border-radius: 50%;
+	    	}
+	    	position: relative;
+    		display: block;
+    		padding-left: 36px;
+    		&:after{
+    			border-left: 1px solid $back-color-425668;
+			    bottom: 0;
+			    content: "";
+			    left: 27px;
+			    position: absolute;
+			    top: 0;
+    		}
+    		&:hover{
+				background-color: rgba(255,255,255,0.05);
+			}
+			&.current-page{
+				border-right: 5px solid $back-color-d46029;
+				background-color: rgba(255,255,255,0.05);
+				&>a{
+					color: $color-ffffff;
+				}
+			}
+    		&>a{
+    			position: relative;
+    			display: block;
+    			color: rgba(255,255,255,0.75);
+			    font-size: 12px;
+			    padding: 10px 9px 9px;
+    		}
+	    }
 	}
 	.fa{
 		width: 26px;

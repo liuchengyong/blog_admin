@@ -5,7 +5,7 @@ import rootReducer from 'reducers'
 
 const loggerMiddleware = createLogger()
 
-const middleware = applyMiddleware(thunkMiddleware,loggerMiddleware);
+const middleware = applyMiddleware(thunkMiddleware);
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

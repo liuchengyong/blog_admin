@@ -8,9 +8,22 @@ $font-size-logo: 22px;
 $color-73879C:#73879C;
 $color-ECF0F1:#ECF0F1;
 $color-E7E7E7:#E7E7E7;
+$color-ffffff:#ffffff;
 
 
 //background-color
 $back-color-2A3F54:#2A3F54;
+$back-color-F7F7F7:#F7F7F7; 
+$back-color-1ABB9C:#1ABB9C; 
+$back-color-425668:#425668; 
+$back-color-d46029:#d46029; 
 
 
+
+
+// 常用样式
+@mixin siderBarHoverAndActive {
+    text-shadow: rgba(0,0,0,0.25) 0 -1px 0;
+    background: linear-gradient(#334556, #2C4257),#2A3F54;
+    box-shadow: rgba(0,0,0,0.25) 0 1px 0, inset rgba(255,255,255,0.16) 0 1px 0;
+}

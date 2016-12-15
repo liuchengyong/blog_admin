@@ -5,6 +5,7 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 
 var config = Object.assign({}, base.defaultSetting, {
+    devtool: 'eval-source-map',
     entry: [
         `${base.src}/index.js`,
         `webpack-dev-server/client?http://localhost:${base.port}`,
@@ -20,8 +21,8 @@ var config = Object.assign({}, base.defaultSetting, {
             title: 'blogAdmin',
             template: 'index-dev.ejs'
         }),
-        new webpack.HotModuleReplacementPlugin(),
-        new ExtractTextPlugin(`index-${base.version.replace(/\./g,'-')}.css`)
+        // new ExtractTextPlugin(`index-${base.version.replace(/\./g,'-')}.css`),
+        new webpack.HotModuleReplacementPlugin()
     ],
     devServer: {
         contentBase: base.dev,
@@ -39,13 +40,24 @@ var config = Object.assign({}, base.defaultSetting, {
             test: /\.js$/,
             exclude: /node_modules/,
             loader: 'babel-loader'
-        }, {
+        }, 
+        // {
+        //     test: /\.css$/,
+        //     loader: ExtractTextPlugin.extract("style-loader", "css-loader")
+        // }, 
+        // {
+        //     test: /\.scss$/,
+        //     loader: ExtractTextPlugin.extract("style-loader", 'css-loader!autoprefixer-loader?{browsers:["last 2 version", "Firefox 15"]}!sass-loader?sourceMap')
+        // },
+        {
             test: /\.css$/,
-            loader: ExtractTextPlugin.extract("style-loader", "css-loader")
-        }, {
+            loader: "style-loader!css-loader"
+        }, 
+        {
             test: /\.scss$/,
-            loader: ExtractTextPlugin.extract("style-loader", 'css-loader!autoprefixer-loader?{browsers:["last 2 version", "Firefox 15"]}!sass-loader')
-        }, {
+            loader: "style-loader!css-loader!autoprefixer-loader?{browsers:[\"last 2 version\", \"Firefox 15\"]}!sass-loader"//ExtractTextPlugin.extract("style-loader", 'css-loader!autoprefixer-loader?{browsers:["last 2 version", "Firefox 15"]}!sass-loader?sourceMap')
+        },
+         {
             test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/,
             loader: 'url-loader'
         }]

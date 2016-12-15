@@ -11,9 +11,7 @@ class ContainerLeft extends Component{
               <div className="logo">
                 <Link to="/home"><span>MoreWalkSofar</span></Link>
               </div>
-              
-              <Sidebar />
-
+              <Sidebar {...this.props} />
           </div>);
   }
 }

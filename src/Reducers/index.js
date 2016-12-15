@@ -1,14 +1,16 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux';
 
-import counter from 'reducers/counter'
-import about from 'reducers/about'
+import counter from 'reducers/counter';
+import about from 'reducers/about';
+import sideBar from 'reducers/sideBar';
 
 
-const defaults = {}
+const defaults = {};
 
 const reducers = {
     counter: counter,
-    about: about
-}
+    about: about,
+    sideBar: sideBar
+};
 
-export default combineReducers(Object.assign(defaults, reducers))
+export default combineReducers(Object.assign(defaults, reducers));
