@@ -7,7 +7,7 @@ import Sidebar from 'components/Sidebar';
 
 class ContainerLeft extends Component{
   render() {
-    return (<div className="col-md-3 container-left">
+    return (<div className="container-left">
               <div className="logo">
                 <Link to="/home"><span>MoreWalkSofar</span></Link>
               </div>

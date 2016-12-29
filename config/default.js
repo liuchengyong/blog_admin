@@ -7,7 +7,7 @@ var distPath = path.join(__dirname, '/../dist');
 var devPath = path.join(__dirname, '/../public');
 var testPath = path.join(__dirname, '/../test');
 
-var defaultPort = 3000;
+var defaultPort = 10001;
 
 
 var defaultSetting = {
@@ -22,7 +22,8 @@ var defaultSetting = {
             'stores': `${srcPath}/Stores`,
             'reducers': `${srcPath}/Reducers`,
             'images': `${srcPath}/Images`,
-            'vendors': `${srcPath}/Vendors`
+            'vendors': `${srcPath}/Vendors`,
+            'commons': `${srcPath}/Commons`
         }
     }
 };

@@ -9,11 +9,8 @@ import Index from 'pages/Index';
 import BookList from 'pages/BookList';
 import About from 'pages/About';
 
-// 全局css
 
-// bootstrap
-import 'bootstrap/dist/css/bootstrap.css';
-// // Font Awesome 
+// Font Awesome 
 import 'font-awesome/css/font-awesome.css';
 
 import 'styles/index.scss';

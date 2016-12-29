@@ -11,14 +11,11 @@ import configureStore from 'stores';
 
 // pages 
 import Home from 'containers/Home';
-import BookList from 'containers/BookList';
-import About from 'containers/About';
+import Login from 'containers/Login';
 
-// 全局css
 
-// bootstrap
-import 'bootstrap/dist/css/bootstrap.css';
-// // Font Awesome 
+import 'normalize.css';
+// Font Awesome 
 import 'font-awesome/css/font-awesome.css';
 
 import 'styles/index.scss';
@@ -27,10 +24,10 @@ let store = configureStore();
 render((
 	<Provider store={store}>
 		<Router history={browserHistory}>
-	    	<Route path="/" component={Home}/>
-	    	<Route path="/home" component={Home}/>
-	    	<Route path="/booklist" component={BookList}/>
-	    	<Route path="/about" component={About}/>
+	    	<Route path="/" name="home" component={Home}/>
+	    	<Route path="/home" name="home" component={Home}/>
+	    	<Route path="/login" name="login" component={Login}/>
+	    	
   		</Router>
   	</Provider>), document.getElementById('root'));
 

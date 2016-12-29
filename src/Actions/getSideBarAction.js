@@ -3,7 +3,7 @@ let getSideBarAction = () => {
 		code : 0,
 		msg : 'success',
 		result:[
-			{id:'1',text:'控制台',path:'/'},
+			{id:'1',text:'控制台',path:'/home',pname:'home'},
 			{id:'2',text:'用户中心',child:[
 				{id:'3',text:'账号管理',path:'/'},
 				{id:'4',text:'账号管理',path:'/'},

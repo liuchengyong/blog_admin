@@ -1,0 +1,36 @@
+@import 'variable';
+
+.navbar-container{
+	position: relative;
+	display: flex;
+	height: 60px;
+    background-color: $back-color-EDEDED;
+    border-bottom: 1px solid $back-color-D9DEE4;
+    margin-bottom: 10px;
+    .sidebar_toggle{
+    	padding: 0 15px;
+    	align-self: center;
+    	font-size: 26px;
+    	color:$color-5a738e;
+    	cursor: pointer;
+    }
+    .navbar-right{
+    	position: relative;
+    	display: flex;
+    	width: 100%;
+    	justify-content:flex-end;
+    	color:$color-515356;
+    }
+    .msg-list{
+    	padding: 0 15px;
+    	font-size: 15px;
+    	align-self: center;
+    }
+    .user-profile{
+    	padding: 0 15px;
+    	align-self: center;
+    	i {
+    		font-size: 15px;
+    	}
+    }
+}

@@ -1,8 +1,7 @@
 import React, {Component} from 'react'
 
+import Tree from 'components/Tree';
 
-
-import Tree from 'components/tree/Tree';
 
 import 'styles/sidebar.scss';
 
@@ -12,11 +11,8 @@ class Sidebar extends Component{
     this.props.actions.getSideBarAction();
   }
 
-
-
   render() {
-    console.log(this.props);
-
+    let path = this.props.route.name;
     let sideBar = this.props.sideBar;
     if(sideBar.status != 'success'){
       return (<div className="sidebar-container">你没有任何权限</div>);
@@ -36,7 +32,7 @@ class Sidebar extends Component{
     }
     return (
       <div className="sidebar-container">
-          <Tree tree={list} level={1} />
+          <Tree tree={list} level={1} path={path} />
       </div>);
   }
 }
