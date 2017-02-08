@@ -1,54 +1,51 @@
-import React, {Component} from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import React, {Component} from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Link } from 'react-router';
 
-import { Router, Route, Link , browserHistory } from 'react-router';
 
 // pages 
-import Index from 'pages/Index';
-import BookList from 'pages/BookList';
-import About from 'pages/About';
+import Sidebar from 'components/Sidebar';
+import NavBar from 'components/NavBar';
 
-
-// Font Awesome 
-import 'font-awesome/css/font-awesome.css';
-
-import 'styles/index.scss';
-
-
-
-import successAbout from 'actions/bindAbout';
+import getSideBarAction from 'actions/getSideBarAction';
 
 
 class Main extends Component{
+  
   render() {
+    let path = 'home';
+    if(this.props.routes.length > 0){
+      path = this.props.routes[this.props.routes.length-1].name; 
+    }
     return (
-    	<div className="container">
-    		<Router history={browserHistory}>
-		    	<Route path="/" component={Index}/>
-		    	<Route path="/booklist" component={BookList}/>
-		    	<Route path="/about" component={About}/>
-	  		</Router>
+    	<div className="main-container">
+    		<div className="container-left">
+          <div className="logo">
+            <Link to="/home"><span></span></Link>
+          </div>
+          <Sidebar path={path} actions={this.props.actions} sideBar={this.props.sideBar} />
+        </div>
+    		<div className="container-right">
+           <NavBar />
+           {this.props.children}
+          </div>
     	</div>);
-  }
-
-  componentWillMount(){
-  	this.props.actions.successAbout('success');
   }
 }
 
 function mapStateToProps(state) {
 	return {
-		about:state.about
+		sideBar:state.sideBar
 	}
 }
 
 function mapDispatchToProps(dispatch) {
 	let boundActionCreators = bindActionCreators({
-		successAbout:successAbout
+		getSideBarAction:getSideBarAction
 	}, dispatch);
 
 	return {actions: boundActionCreators};
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(About);
+export default connect(mapStateToProps,mapDispatchToProps)(Main);

@@ -1,4 +1,9 @@
-@import 'variable';
+
+.main-container{
+    position: relative;
+    display: flex;
+    min-height: 100%;
+}
 .container-left{
     position: relative;
 	width: 230px;
@@ -20,11 +25,10 @@
 	    	color: $color-ECF0F1;
 	    }
     }
-
-
 }
 
-	
+.container-right{
+    background: $back-color-F7F7F7;
+    flex:1;
 
-
-
+}

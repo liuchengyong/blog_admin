@@ -4,10 +4,10 @@ import { bindActionCreators } from 'redux'
 
 import DataTable from 'components/DataTable';
 
+import getSideBarAction from 'actions/getSideBarAction';
 
 
 class Home extends Component{
-
   render() {
     let list = [];
     for(let i = 0; i < 1000;i++){
@@ -50,18 +50,23 @@ class Home extends Component{
 
     return ( 
         <div className="home-container">
-            welcome
+        	<ContainerLeft {...this.props} />
+          <ContainerRight>
+            <DataTable {...dataTable}/>
+          </ContainerRight>
         </div>);
   }
 }
 
 function mapStateToProps(state) {
 	return {
+		sideBar:state.sideBar
 	}
 }
 
 function mapDispatchToProps(dispatch) {
 	let boundActionCreators = bindActionCreators({
+		getSideBarAction:getSideBarAction
 	}, dispatch);
 
 	return {actions: boundActionCreators};

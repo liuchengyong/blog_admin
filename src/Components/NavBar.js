@@ -1,7 +1,6 @@
 
 import React, {Component} from 'react'
 
-import 'styles/navbar.scss';
 class NavBar extends Component{
   render() {
     return (<div className="navbar-container">
@@ -10,7 +9,7 @@ class NavBar extends Component{
           <div className="msg-list"><i className="fa fa-envelope-o"></i></div>
           <div className="user-profile">
             <i className="fa fa-user"></i>
-            刘诚勇
+            <span>刘诚勇</span>
           </div>
         </div>
       </div>);

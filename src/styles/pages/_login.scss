@@ -1,0 +1,191 @@
+.login-container {
+    position: relative;
+    width: 100%;
+    background-color: #F7F7F7;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+}
+
+form {
+    position: relative;
+    margin-top: 50px;
+    width: 300px;
+    .from-title {
+        position: relative;
+        display: block;
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+        font-size: 25px;
+        &::before,
+        &::after {
+            position: absolute;
+            background: #7e7e7e;
+            content: "";
+            height: 1px;
+            top: 25px;
+            width: 20%;
+        }
+        &::before {
+            left: 0;
+        }
+        &::after {
+            right: 0;
+        }
+    }
+    .error-msg{
+      display: block;
+      padding: 5px 0;
+    }
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 15px;
+    .input-group-addon {
+        position: absolute;
+        top: 0;
+        font-size: 14px;
+        font-weight: normal;
+        line-height: 34px;
+        width: 34px;
+        color: #555;
+        text-align: center;
+        &:first-child {
+            left: 0;
+        }
+        &:last-child {
+            right: 0;
+        }
+        +.form-control {
+            padding-left: 34px;
+        }
+    }
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    &:focus {
+        border-color: #66afe9;
+        outline: 0;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+    }
+    &[disabled],
+    &[readonly] {
+        background-color: #eee;
+        opacity: 1; // iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655
+    }
+    &[disabled] {
+        cursor: not-allowed;
+    }
+    &:not(:last-child) {
+        padding-right: 34px;
+    }
+}
+
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.btn-default {
+  color: #fff;
+  background-color: #333;
+}
+.btn-info {
+  color: #fff;
+  background-color: #5bc0de;
+  border-color: #46b8da;
+}
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+.text-left {
+  text-align: left;
+}
+.text-right {
+  text-align: right;
+}
+.text-center {
+  text-align: center;
+}
+.text-justify {
+  text-align: justify;
+}
+.text-nowrap {
+  white-space: nowrap;
+}
+.text-lowercase {
+  text-transform: lowercase;
+}
+.text-uppercase {
+  text-transform: uppercase;
+}
+.text-capitalize {
+  text-transform: capitalize;
+}
+.text-muted {
+  color: #777;
+}
+.text-primary {
+  color: #337ab7;
+}
+a.text-primary:hover,
+a.text-primary:focus {
+  color: #286090;
+}
+.text-success {
+  color: #3c763d;
+}
+a.text-success:hover,
+a.text-success:focus {
+  color: #2b542c;
+}
+.text-info {
+  color: #31708f;
+}
+a.text-info:hover,
+a.text-info:focus {
+  color: #245269;
+}
+.text-warning {
+  color: #8a6d3b;
+}
+a.text-warning:hover,
+a.text-warning:focus {
+  color: #66512c;
+}
+.text-danger {
+  color: #a94442;
+}
+a.text-danger:hover,
+a.text-danger:focus {
+  color: #843534;
+}
+

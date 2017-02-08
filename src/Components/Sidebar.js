@@ -3,7 +3,6 @@ import React, {Component} from 'react'
 import Tree from 'components/Tree';
 
 
-import 'styles/sidebar.scss';
 
 class Sidebar extends Component{
 
@@ -12,8 +11,7 @@ class Sidebar extends Component{
   }
 
   render() {
-    let path = this.props.route.name;
-    let sideBar = this.props.sideBar;
+    let {path,sideBar} = this.props;
     if(sideBar.status != 'success'){
       return (<div className="sidebar-container">你没有任何权限</div>);
     }

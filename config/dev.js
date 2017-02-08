@@ -21,7 +21,7 @@ var config = Object.assign({}, base.defaultSetting, {
             title: 'blogAdmin',
             template: 'index-dev.ejs'
         }),
-        // new ExtractTextPlugin(`index-${base.version.replace(/\./g,'-')}.css`),
+        new ExtractTextPlugin(`index-${base.version.replace(/\./g,'-')}.css`),
         new webpack.HotModuleReplacementPlugin()
     ],
     devServer: {
@@ -40,24 +40,13 @@ var config = Object.assign({}, base.defaultSetting, {
             test: /\.js$/,
             exclude: /node_modules/,
             loader: 'babel-loader'
-        }, 
-        // {
-        //     test: /\.css$/,
-        //     loader: ExtractTextPlugin.extract("style-loader", "css-loader")
-        // }, 
-        // {
-        //     test: /\.scss$/,
-        //     loader: ExtractTextPlugin.extract("style-loader", 'css-loader!autoprefixer-loader?{browsers:["last 2 version", "Firefox 15"]}!sass-loader?sourceMap')
-        // },
-        {
+        },  {
             test: /\.css$/,
-            loader: "style-loader!css-loader"
-        }, 
-        {
+            loader: ExtractTextPlugin.extract("style-loader", "css-loader")
+        }, {
             test: /\.scss$/,
-            loader: "style-loader!css-loader!autoprefixer-loader?{browsers:[\"last 2 version\", \"Firefox 15\"]}!sass-loader"//ExtractTextPlugin.extract("style-loader", 'css-loader!autoprefixer-loader?{browsers:["last 2 version", "Firefox 15"]}!sass-loader?sourceMap')
-        },
-         {
+            loader: ExtractTextPlugin.extract("style-loader", 'css-loader!autoprefixer-loader?{browsers:["last 3 version", "Firefox 15",">1%"]}!sass-loader?sourceMap')
+        }, , {
             test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/,
             loader: 'url-loader'
         }]

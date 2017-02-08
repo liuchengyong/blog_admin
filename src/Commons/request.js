@@ -11,6 +11,7 @@ let defaultOptions = {
 
 let ObjectToSearchUrl = obj => {
 	obj.token =  localStorage.getItem("token");
+	console.log(obj.token);
 	let params = [];
 	for (var key in obj) {
 		if(Array.isArray(obj[key])){
@@ -32,7 +33,7 @@ let request = options => {
 	options.baseUrl ? delete options.baseUrl : null;
 	options.url ? delete options.url : null;
 
-	let data = ObjectToSearchUrl(options.data);
+	let data = ObjectToSearchUrl(options.data || {});
 	options.data ? delete options.data : null;
 
 	// 请求参数

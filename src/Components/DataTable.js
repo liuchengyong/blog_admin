@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import classNames from 'commons/ClassNames'
 import { Link } from 'react-router';
 
-import 'styles/datatable.scss';
 class DataTable extends Component{
 
 	constructor(props) {

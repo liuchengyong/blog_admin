@@ -1,0 +1,56 @@
+.me-container{
+	margin: 30px 20px;
+	border:1px solid #E6E9ED;
+	background-color: #fff;
+	padding: 20px 15px;
+}
+.me-container-header{
+	font-size: 18px;
+	padding: 0 0 12px;
+	border-bottom:2px solid #E6E9ED;
+ }
+.me-container-body{
+	position: relative;
+	display: flex;
+	padding: 15px;
+
+	.me-other{
+		flex:3;
+	}
+}
+.me-base{
+	flex:1;
+	.me-head-icon{
+		display: block;
+		width: 100%;
+		height: auto;
+		border: 5px solid #E6E9ED;
+	}
+	span{
+		display: block;
+	}
+	.me-name{
+		padding: 10px 0;
+		font-size: 24px;
+		font-weight: 500;
+	}
+	.me-address,
+	.me-job,
+	.me-home-page{
+		padding-bottom: 6px;
+		i{
+			padding-right: 5px;
+		}
+	}
+	.title{
+		font-size: 16px;
+		font-weight: 500;
+		padding: 10px 0;
+	}
+	.progress{
+		width: 90%;
+	}
+	.skill{
+
+	}
+}

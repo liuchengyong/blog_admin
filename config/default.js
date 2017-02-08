@@ -14,16 +14,16 @@ var defaultSetting = {
     devtool: "#inline-source-map",
     resolve: {
         alias: {
-            'styles': `${srcPath}/Styles/`,
-            'components': `${srcPath}/Components/`,
-            'containers': `${srcPath}/Containers/`,
-            'actions': `${srcPath}/Actions/`,
-            'config': `${srcPath}/Configs/`,
-            'stores': `${srcPath}/Stores`,
-            'reducers': `${srcPath}/Reducers`,
-            'images': `${srcPath}/Images`,
-            'vendors': `${srcPath}/Vendors`,
-            'commons': `${srcPath}/Commons`
+            'styles': `${srcPath}/styles/`,
+            'components': `${srcPath}/components/`,
+            'containers': `${srcPath}/containers/`,
+            'actions': `${srcPath}/actions/`,
+            'config': `${srcPath}/configs/`,
+            'stores': `${srcPath}/stores`,
+            'reducers': `${srcPath}/reducers`,
+            'images': `${srcPath}/images`,
+            'vendors': `${srcPath}/vendors`,
+            'commons': `${srcPath}/commons`
         }
     }
 };
