@@ -2,21 +2,32 @@
 
 
 let defaults = {
-	status: 'INIT',
-	json: null
+
 }
-// status :init progress success error
 let user = (state = defaults, action) => {
     switch (action.type) {
-        case 'USER_PROGRESS':
-            return Object.assign({},state,{status:'PROGRESS'});
-        case 'USER_ERROR':
-            return Object.assign({},state,{status:'ERROR'});
-        case 'USER_SUCCESS':
-            if(action.json.code == 0){
-                localStorage.setItem('token', action.json.result.token);
-            }
-            return Object.assign({},state,{status:'SUCCESS',json:action.json}); 
+        case 'user_init': 
+            return action.data;
+        
+
+        //登陆
+        case 'login_load':
+            return Object.assign({},state,{login_status:'laod'});
+        case 'login_error':
+            return Object.assign({},state,{login_status:'error'});
+        case 'login_success':
+            return Object.assign({},state,{login_status:'success',data:action.data}); 
+
+        //添加
+        case 'add_load':
+            return Object.assign({},state,{add_status:'laod'});
+        case 'add_error':
+            return Object.assign({},state,{add_status:'error'});
+        case 'add_success':
+            return Object.assign({},state,{add_status:'success',add:action.data}); 
+
+        //
+
         default:
             return state;
     }

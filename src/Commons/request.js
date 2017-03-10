@@ -1,17 +1,13 @@
-// import config from 'configs/request';
-
-let myHeaders = new Headers();
+import config from 'config';
 
 let defaultOptions = {
 	method: 'GET',
-	headers:{
+	headers: {
 		'Content-Type':'application/x-www-form-urlencoded'
 	},
 };
 
 let ObjectToSearchUrl = obj => {
-	obj.token =  localStorage.getItem("token");
-	console.log(obj.token);
 	let params = [];
 	for (var key in obj) {
 		if(Array.isArray(obj[key])){
@@ -20,33 +16,40 @@ let ObjectToSearchUrl = obj => {
 			params.push(key+'='+obj[key]);
 		}
 	}
-
-	return params.join('&');
+	return  params.join('&');
 };
 
+/**
+ *
+ * options
+ * url method headers mode cache body 
+ * 
+ */
 
 let request = options => {
-	if(!options.url) return console.error('请求地址不存在');
-	
-	// 请求地址	
-	let url = options.baseUrl || '//blog.liuchengyong.cn'   + options.url;
-	options.baseUrl ? delete options.baseUrl : null;
-	options.url ? delete options.url : null;
-
-	let data = ObjectToSearchUrl(options.data || {});
-	options.data ? delete options.data : null;
-
-	// 请求参数
-	let cof = Object.assign({},defaultOptions,options);
-	if(cof.method == 'GET'){
-		url += "?" + data;
+	let excludeProps = ['url','data'];
+	let _options = {};
+	Object.keys(options).map(key => excludeProps.includes(key) ? null : _options[key] = options[key]);
+	let data =  ObjectToSearchUrl(options.data || {});
+	_options = Object.assign({},defaultOptions,_options);
+	let url = config.baseUrl + options.url;
+	if(_options.method == 'GET'){
+		url += data ? ("?" + data) : '';
+	}else{
+		_options.body = data;
 	}
-	//else if(cof.method == 'POST'){
-	else{
-		cof.body = data
-	}
-	return fetch(url,cof);
+	return fetch(url,_options);
+}
+
+/**
+ * [description]  全局配置
+ * @param  {[type]} options [description]
+ * @return {[type]}         [description]
+ */
+let requestGloble = options => {
+	return request(options);
 }
 
 
-export default request;
+
+export default requestGloble;

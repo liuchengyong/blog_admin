@@ -1,5 +1,5 @@
 let config = {
-	baseUrl:'//blog.liuchengyong.cn'
+	baseUrl:'//api.liuchengyong.cn',
 }
 
 export default config;

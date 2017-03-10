@@ -1,2 +1,13 @@
 .home-container{
+	position: relative;
+	padding: 20px;
+
+	code{
+		display: block;
+		width: 400px;
+		overflow: hidden;
+	}
+	.froms{
+		width: 400px;
+	}
 }

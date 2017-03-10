@@ -23,7 +23,8 @@ var defaultSetting = {
             'reducers': `${srcPath}/reducers`,
             'images': `${srcPath}/images`,
             'vendors': `${srcPath}/vendors`,
-            'commons': `${srcPath}/commons`
+            'commons': `${srcPath}/commons`,
+            'requests': `${srcPath}/requests`
         }
     }
 };

@@ -1,0 +1,125 @@
+button {
+    display: inline-block;
+    border-width: 1px;
+    border-style: solid;
+    line-height: 1em;
+    border-radius: 4px;
+    padding: 6px 20px;
+    margin: 0 10px;
+    outline: none;
+    color: #666;
+    color: #666;
+    background-color: #EEE;
+    border-color: #EEE;
+    &:hover {
+        background-color: #f6f6f6;
+    }
+    &:active {
+        background-color: #eeeeee;
+        border-color: #cfcfcf;
+        color: #d4d4d4;
+    }
+}
+
+.btn-sm {
+    padding: 2px 8px;
+    margin: 0 4px;
+}
+.btn-md{
+    padding: 8px 30px;
+    margin: 0 10px;
+    font-size: 16px;
+}
+
+.btn-block{
+    display: block;
+    width: 100%;
+    margin: 0;
+}
+
+.btn-disable{
+    background-color: #d1d5d8 !important;
+    border-color: #d1d5d8 !important;
+    color: #666 !important;
+    pointer-events:none;
+}
+
+.btn-primary {
+    background-color: #1B9AF7;
+    border-color: #1B9AF7;
+    color: #FFF;
+    &:hover {
+        background-color: #4cb0f9;
+        border-color: #4cb0f9;
+        color: #FFF;
+    }
+    &:active {
+        background-color: #2798eb;
+        border-color: #2798eb;
+        color: #0880d7;
+    }
+}
+
+.btn-action {
+    background-color: #A5DE37;
+    border-color: #A5DE37;
+    color: #FFF;
+    &:hover {
+        background-color: #b9e563;
+        border-color: #b9e563;
+        color: #FFF;
+    }
+    &:active {
+        background-color: #a1d243;
+        border-color: #a1d243;
+        color: #8bc220;
+    }
+}
+
+.btn-highlight {
+    background-color: #FEAE1B;
+    border-color: #FEAE1B;
+    color: #FFF;
+    &:hover {
+        background-color: #fec04e;
+        border-color: #fec04e;
+        color: #FFF;
+    }
+    &:active {
+        background-color: #f3ab26;
+        border-color: #f3ab26;
+        color: #e59501;
+    }
+}
+
+.btn-caution {
+    background-color: #FF4351;
+    border-color: #FF4351;
+    color: #FFF;
+    &:hover {
+        background-color: #ff7680;
+        border-color: #ff7680;
+        color: #FFF;
+    }
+    &:active {
+        background-color: #f64c59;
+        border-color: #f64c59;
+        color: #ff1022;
+    }
+}
+
+.btn-royal {
+    background-color: #7B72E9;
+    border-color: #7B72E9;
+    color: #FFF;
+    &:hover {
+        background-color: #a49ef0;
+        border-color: #a49ef0;
+        color: #FFF;
+    }
+    &:active {
+        background-color: #827ae1;
+        border-color: #827ae1;
+        color: #5246e2;
+    }
+}

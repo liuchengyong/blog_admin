@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-import Progress from 'components/Progress'
+import Progress from 'components/Progress';
+import Chart from 'components/Chart';
+
 
 import headicon from 'images/picture.jpg';
 
-let LineChart = require("react-chartjs").Line;
+
 
 function rand(min, max, num) {
   var rtn = [];
@@ -23,32 +25,40 @@ class Me extends Component{
   render() {
     console.log(this.props);
 
-
-    let aa =  {
-      labels: ["January", "February", "March", "April", "May", "June", "July"],
-      datasets: [
-          {
-              label: "My First dataset",
-              fillColor: "rgba(220,220,220,0.2)",
-              strokeColor: "rgba(220,220,220,1)",
-              pointColor: "rgba(220,220,220,1)",
-              pointStrokeColor: "#fff",
-              pointHighlightFill: "#fff",
-              pointHighlightStroke: "rgba(220,220,220,1)",
-              data: rand(32, 100, 7)
-          },
-          {
-              label: "My Second dataset",
-              fillColor: "rgba(151,187,205,0.2)",
-              strokeColor: "rgba(151,187,205,1)",
-              pointColor: "rgba(151,187,205,1)",
-              pointStrokeColor: "#fff",
-              pointHighlightFill: "#fff",
-              pointHighlightStroke: "rgba(151,187,205,1)",
-              data: rand(32, 100, 7)
-          }
-      ]
-    };
+    
+    let data = {
+            labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+            datasets: [{
+                label: '# of Votes',
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        };
+    let options = {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        };
         
     return ( 
         <div className="me-container">
@@ -68,7 +78,7 @@ class Me extends Component{
                 Web Applications
                 <Progress size={'80%'} className="progress-sm" barClassName="bg-green"/>
               </span>
-               <span className="skill">
+              <span className="skill">
                 Website Design
                 <Progress size={'70%'} className="progress-sm" barClassName="bg-green"/>
               </span>
@@ -85,7 +95,7 @@ class Me extends Component{
                 gemes
                 <Progress size={'80%'} className="progress-sm" barClassName="bg-green"/>
               </span>
-               <span className="skill">
+              <span className="skill">
                 basketball
                 <Progress size={'70%'} className="progress-sm" barClassName="bg-green"/>
               </span>
@@ -95,9 +105,11 @@ class Me extends Component{
               </span>
             </div>
             <div className="me-other">
-              <div>
-                <LineChart data={aa} width="600" height="250"/>
+              <div className="profile-title">
+                操作历史记录
               </div>
+              <Chart type="bar" data={data} options={options}/>
+              
             </div>
           </div>
         </div>);

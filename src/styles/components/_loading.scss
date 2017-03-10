@@ -1,0 +1,57 @@
+.loading-component {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 10000;
+    .box {
+        position: relative;
+        margin: 30% auto 0;
+        width: 100px;
+        background-color: #fff;
+        border-radius: 5px;
+        text-align: center;
+        padding: 25px 0 15px;
+        z-index: 10001;
+        i {
+            transform-origin: center;
+            animation: rotate 1.5s infinite steps(8);
+            color: #1bc3a9;
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+        span {
+            display: block;
+            font-size: 13px;
+            text-align: center;
+            line-height: 16px;
+        }
+    }
+    &.hasContent {
+        .box {
+            width: 110px;
+            padding: 15px 0 10px;
+        }
+    }
+    &.noback {
+        background-color: transparent;
+        .box {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #aaa;
+            i {
+                color: #fff;
+            }
+        }
+    }
+}
+
+@keyframes rotate {
+    0 {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

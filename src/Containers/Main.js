@@ -14,10 +14,12 @@ import getSideBarAction from 'actions/getSideBarAction';
 class Main extends Component{
   
   render() {
+    
     let path = 'home';
     if(this.props.routes.length > 0){
       path = this.props.routes[this.props.routes.length-1].name; 
     }
+
     return (
     	<div className="main-container">
     		<div className="container-left">
@@ -36,7 +38,8 @@ class Main extends Component{
 
 function mapStateToProps(state) {
 	return {
-		sideBar:state.sideBar
+		sideBar:state.sideBar,
+    user:state.user
 	}
 }
 
