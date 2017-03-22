@@ -40,6 +40,14 @@ export const getById = data => {
 	})
 }
 
+export const getByPhone = data => {
+	return request({
+		url:'/blog/user/getByPhone',
+		data,
+	})
+}
+
+
 export const deleteByIds = data => {
 	return request({
 		method:'DELETE',

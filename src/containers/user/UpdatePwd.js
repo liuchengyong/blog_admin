@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux'
 
 import DataTable from 'components/DataTable';
 
-import getSideBarAction from 'actions/getSideBarAction';
 
 
 class Home extends Component{

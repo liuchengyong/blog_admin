@@ -19,7 +19,6 @@ class Home extends Component{
         isHideAlert:true,
         isHideLoading:true,
         isHideLoading2:true,
-
       };
       
       this.sexList = [
@@ -51,7 +50,7 @@ class Home extends Component{
 
 
   render() {
-    let { user} = this.props;
+    let { user,form} = this.props;
     let { name, sex, birth} = this.state;
     return ( 
         <div className="home-container">
@@ -94,13 +93,16 @@ class Home extends Component{
 
             <h2>froms</h2>
             <div className="froms style">
-              <Form className="form-horizontal" type="input" name="name" lab="姓名" 
-                  value={name || ''} placeholder="请输入姓名" handleChange={this.handleFormChange.bind(this)} />
-              <Form className="form-horizontal" type="radio" name="sex" lab="性别" 
-                  list={this.sexList} value={sex || ''}  handleChange={this.handleFormChange.bind(this)}/>
-              <Form className="form-horizontal" type="date" name="birth" lab="出生日期" 
-                value={birth || ''} placeholder="请输入出生日期" handleChange={this.handleFormChange.bind(this)}/>
+      
+              <Form className="form-horizontal" type="text" formName="test" name="name"  lab="姓名" 
+                placeholder="请输入姓名" />
 
+              <Form className="form-horizontal" type="radio" formName="test" name="sex" lab="性别" 
+                  list={this.sexList} />
+
+
+              <Form className="form-horizontal" type="date" name="birth" lab="出生日期" formName="test"
+                 placeholder="请输入出生日期" />
             </div>
         </div>);
   }
@@ -108,7 +110,8 @@ class Home extends Component{
 
 function mapStateToProps(state) {
 	return {
-      user:state.user
+      user:state.user,
+      form:state.form
 	}
 }
 

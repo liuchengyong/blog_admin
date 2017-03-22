@@ -11,6 +11,7 @@ import configureStore from 'stores';
 
 import _polyfill from 'commons/polyfill';
 // pages 
+import Intercept from 'containers/Intercept';
 import Login from 'containers/Login';
 
 import Main from 'containers/Main';
@@ -34,28 +35,32 @@ import 'styles/index.scss';
 let store = configureStore();
 
 let intercept = (nextState, replace, callback)=>{
-	if(sessionStorage.user){
-		store.dispatch({type:'user_success',data:JSON.parse(sessionStorage.user)});
-	}
-	callback();
+	// if(sessionStorage.user){
+	// 	store.dispatch({type:'user_success',data:JSON.parse(sessionStorage.user)});
+	// }
+	// callback();
 }
 
 render((
 	<Provider store={store}>
 		<Router history={hashHistory}>
-	    	<Route path="/" component={Main} >
-	    		<IndexRoute name="home" component={Home} onEnter={intercept}/>
-	    		<Route path="home" name="home" component={Home}/>
+			<Route path="/" component={Intercept}>
+				<IndexRoute name="home" component={Home}/>
+				<Route path="home" name="home" component={Home}/>
 
-	    		<Route path="user">
+				<Route path="user">
 	    			<Route path="add" name="userAdd"  component={UserAdd} />
-	    			
 	    			<Route path="list" name="userList" component={UserList}/>
 					<Route path="me" name="me"  component={Me} />
 					<Route path="updatePwd" name="UserUpdatePwd"  component={UserUpdatePwd} />
 	    		</Route>
-	    	</Route>
-	    	<Route path="/login" name="login" component={Login}/>
+
+
+				<Route path="/main" component={Main} >
+		    	</Route>
+		    	
+			</Route>
+			<Route path="/login" name="login" component={Login}/>
   		</Router>
   	</Provider>), document.getElementById('root'));
 

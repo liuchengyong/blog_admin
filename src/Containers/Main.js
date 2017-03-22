@@ -8,7 +8,6 @@ import { Link } from 'react-router';
 import Sidebar from 'components/Sidebar';
 import NavBar from 'components/NavBar';
 
-import getSideBarAction from 'actions/getSideBarAction';
 
 
 class Main extends Component{
@@ -45,7 +44,6 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
 	let boundActionCreators = bindActionCreators({
-		getSideBarAction:getSideBarAction
 	}, dispatch);
 
 	return {actions: boundActionCreators};

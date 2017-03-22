@@ -11,43 +11,60 @@
  *      {type:'length',min:1,max:2,msg:'手机号格式不正确，请输入正确的手机号'},
  *      {type:'size',min:1,max:2,msg:'手机号格式不正确，请输入正确的手机号'},
  *      {type:'reg',reg:/\d/,msg:'手机号格式不正确，请输入正确的手机号'},
+ *      {type:'fun',func:function(e){},msg:'手机号格式不正确，请输入正确的手机号'},
+ * 
  *  ]
  * 
  */
 let verify = obj => {
-    if (Array.isArray(obj)) {
-    	for (let i = 0; i < obj.length; i++) {
-    		let result = verifyItem(obj[i]);
-    		if(!result.verify) return result;
-    	}
-    	return {verify: true};
-    } else {
-    	return verifyItem(obj);
+    let { val, rules} = obj;
+    if (Array.isArray(rules)) {
+    	return verifyItems(val,rules,0);
+    } else if(typeof rules == 'object'){
+    	return verifyItem(val,rules);
     }
 };
+let verifyItems = (val, rules, index) => {
+    if(rules.length <= index) return Promise.resolve({verify: true});
+    return verifyItem(val, rules[index++])
+                .then(result=>{
+                    if(!result.verify) return result;
+                    return verifyItems(val,rules,index);
+                })
+}
 
-let verifyItem = obj => {
-    let { val, rules } = obj;
-    for (let i = 0; i < rules.length; i++) {
-        let rule = rules[i];
-        switch (rule.type) {
-            case 'null':
-                if (val) break;
-                else return {verify: false, msg: rule.msg};
-            case 'reg':
-        		if(rule.reg.test(val)) break;
-        		else return {verify: false, msg: rule.msg};
-            case 'length':
-                if(verifyLength(val,rule)) break;
-                else return {verify: false, msg: rule.msg};
-            case 'size':
-                if(verifySize(val,rule)) break;
-                else return {verify: false, msg: rule.msg};
-            default:
-                break;
-        }
+
+
+let verifyItem = (val, rule) => {
+    let result = true;
+    switch (rule.type) {
+        case 'null':
+            if(val) break;
+            else result = false;
+            break;
+        case 'reg':
+            if(rule.reg.test(val)) break;
+            else result = false;
+            break;
+        case 'length':
+            if(verifyLength(val,rule)) break;
+            else result = false;
+            break;
+        case 'size':
+            if(verifySize(val,rule)) break;
+            else result = false;
+            break;
+        case 'fun':
+            if(rule.func(val)) break;
+            else result = false;
+            break;
+        case 'remote':
+            return rule.func(val).then(verify => verify ? {verify: true} : {verify: false, msg: rule.msg});
+        default:
+            break;
     }
-    return {verify: true};
+
+    return Promise.resolve(result ? {verify: true} : {verify: false, msg: rule.msg});
 }
 
 let verifyLength = (val,rule) =>{

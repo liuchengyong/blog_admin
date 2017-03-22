@@ -2,70 +2,30 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
+import { formInit,formChange}  from 'actions/form';
 
 import classNames from 'commons/ClassNames';
-import Verify from 'commons/verify';
 import DatePicker from 'components/DatePicker';
 
 
 
 class Input extends Component{
-	constructor(props){
-		super(props);
-	}
-	componentDidMount(){
-		let {name,formObj:form,nameStatus,nameVerify} = this.props;
-		this.props.actions.formSet({form,[form]:{
-			[name]:'',
-			[nameStatus]:false,
-			[nameVerify]:false
-		}})
-	}
-
-	handleChange(event){
-		let {name,formObj:form} = this.props;
-		let value = event.target.value;
-		this.props.actions.formSet({form,[form]:{
-			[name]:value,
-		}})
-		this.handleBlurOrFocus(event)
-	}
 	handleBlurOrFocusOrChange(event){
-		let {name,formObj:form, form:_form,verify,nameStatus,nameVerify,nameMsg} = this.props;
-		let obj = _form[form];
-		let value = event.target.value;
-		let formData = {};
-		if(event.type == 'change'){
-			formData[name] = value;
-		}
-		if(this.props.verify && !obj[nameStatus]){
-			formData[nameStatus] = true;
-		}
-		if(this.props.verify){
-			let result = Verify({val:value,rules:verify});
-			formData[nameVerify] = result.verify;
-			formData[nameMsg] = result.msg;
-		}
-		this.props.actions.formSet({form,[form]:formData});
+		this.props.handleChange(event.target.value);
 	}
-
 	render(){
-		let {lab,type,placeholder,readOnly,iconBefore,iconAfter,form,formObj,name,nameStatus,nameVerify,nameMsg,focus} = this.props;
+		let { 
+			lab, type, placeholder, readOnly, 
+			iconBefore, iconAfter, form, 
+			formName, name, nameMsg, focus, hasError} = this.props;
 		let _props = {};
-		let excludedProps = ['lab','placeholder','name','readOnly',
-			'iconBefore','iconAfter','type','actions','form','formObj','verify','nameStatus','nameVerify','nameMsg','focus'];
-		Object.keys(this.props).map(name => excludedProps.includes(name) ? '' : _props[name] = this.props[name]);
+		let includedProps = ['className'];
+		Object.keys(this.props).map(name => includedProps.includes(name) ? _props[name] = this.props[name] : '');
 
-		if(!form[formObj]) return null;
-		let hasError = form[formObj][nameStatus] && !form[formObj][nameVerify] 
-		_props.className = classNames(_props.className,{
-			hasError: hasError
-		})
 		return (<div {..._props}>
 					{
 						lab ? <div className="cell-hd">{lab}</div> : null
 					}
-		    		
 		    		<div className={classNames("cell-bd",{
 		    			'has-before-icon': iconBefore ? true : false,
 		    			'has-after-icon': iconAfter ? true : false
@@ -75,11 +35,11 @@ class Input extends Component{
 		    			}
 		    			<input 
 		    				type = {type || "text"}
-		    				value = { form[formObj][name] || ''} 
+		    				value = { form[formName][name] || ''} 
 		    				placeholder = { placeholder || ''} 
 		    				onChange = {this.handleBlurOrFocusOrChange.bind(this)}
-		    				onBlur = {this.handleBlurOrFocusOrChange.bind(this)}
-		    				onFocus = {this.handleBlurOrFocusOrChange.bind(this)}
+		    				// onBlur = {this.handleBlurOrFocusOrChange.bind(this)}
+		    				// onFocus = {this.handleBlurOrFocusOrChange.bind(this)}
 		    				readOnly = {readOnly}
 		    				autoComplete="off" 
 		    				autoFocus={focus}/>
@@ -89,26 +49,28 @@ class Input extends Component{
 		    			{
 		    				hasError ? 
 		    				<div className="cell-msg">
-				    			{form[formObj][nameMsg]}
+				    			{form[formName][nameMsg]}
 				    		</div> : null
 		    			}
-		    			
 		    		</div>
-		    		<br/>
-		    		
 		    	</div>);
 	}
 }
 
 class Radio extends Component{
+
 	handleChange(item){
-		this.props.handleChange({[this.props.name]:item.key});
+		this.props.handleChange(item.key);
 	}
+
 	render(){
-		let {lab,value,list} = this.props;
+		let { lab, list, form, formName, name, nameMsg, hasError} = this.props;
+		let value = form[formName][name] || '';
+		
 		let _props = {};
-		let excludedProps = ['lab','value','list','name','handleChange'];
-		Object.keys(this.props).map(name => excludedProps.includes(name) ? '' : _props[name] = this.props[name]);
+		let includedProps = ['className'];
+		Object.keys(this.props).map(name => includedProps.includes(name) ? _props[name] = this.props[name] : '');
+
 		return (<div {..._props}>
 					{
 						lab ? <div className="cell-hd">{lab}</div> : null
@@ -116,11 +78,17 @@ class Radio extends Component{
 		    		<div className="cell-bd">
 		    			{
 							list.map(item => <div className="cell-radio" key={item.key} onClick={this.handleChange.bind(this,item)}><i className={classNames({
-								"fa":true,
+								"fa": true,
 								"fa-dot-circle-o": value === item.key,
 								"fa-circle-thin": value !== item.key,
-								"fa-red": value === item.key
+								"fa-check": value === item.key
 							})}></i>{item.value}</div>)
+		    			}
+		    			{
+		    				hasError ? 
+		    				<div className="cell-msg">
+				    			{form[formName][nameMsg]}
+				    		</div> : null
 		    			}
 		    		</div>
 		    	</div>);
@@ -128,47 +96,61 @@ class Radio extends Component{
 }
 
 class TextArea extends Component{
-	handleChange(item){
-		this.props.handleChange({[this.props.name]:item.key});
+	handleChange(event){
+		this.props.handleChange(event.target.value);
 	}
 	render(){
-		let {lab,value} = this.props;
+		let { lab, formName, form, name, nameMsg, hasError} = this.props;
 		let _props = {};
-		let excludedProps = ['lab','value','name','handleChange'];
-		Object.keys(this.props).map(name => excludedProps.includes(name) ? '' : _props[name] = this.props[name]);
+		let includedProps = ['className'];
+
+		Object.keys(this.props).map(name => includedProps.includes(name) ? _props[name] = this.props[name] : '');
+
 		return (<div {..._props}>
 					{
 						lab ? <div className="cell-hd">{lab}</div> : null
 					}
 		    		<div className="cell-bd">
-		    			<textarea defaultValue={value} onChange={this.handleChange.bind(this)} ></textarea>
+		    			<textarea 
+		    				defaultValue={form[formName][name] || ''} 
+		    				onChange = {this.handleChange.bind(this)}
+		    				// onBlur = {this.handleChange.bind(this)}
+		    				// onFocus = {this.handleChange.bind(this)}
+		    			></textarea>
+		    			{
+		    				hasError ? 
+		    				<div className="cell-msg">
+				    			{form[formName][nameMsg]}
+				    		</div> : null
+		    			}
 		    		</div>
 		    	</div>);
 	}
 }
 
 class Date extends Component{
-	handleChange(item){
-		this.props.handleChange({[this.props.name]:item.key});
-	}
-	componentDidMount(){
-	}
 
 	selectDate(date){
-		this.props.handleChange({[this.props.name]:date});
+		this.props.handleChange(date);
 	}
 
 	render(){
-		let {lab,value,options} = this.props;
+		let { lab, form, formName, name, nameMsg, options, hasError} = this.props;
 		let _props = {};
-		let excludedProps = ['lab','value','name','handleChange','options'];
-		Object.keys(this.props).map(name => excludedProps.includes(name) ? '' : _props[name] = this.props[name]);
+		let includedProps = ['className'];
+		Object.keys(this.props).map(name => includedProps.includes(name) ? _props[name] = this.props[name] : "");
 		return (<div {..._props}>
 					{
 						lab ? <div className="cell-hd">{lab}</div> : null
 					}
 		    		<div className="cell-bd">
-		    			<DatePicker options={options} value={value} selectDate={this.selectDate.bind(this)}/>
+		    			<DatePicker options={options} value={form[formName][name]} selectDate={this.selectDate.bind(this)}/>
+		    			{
+		    				hasError ? 
+		    				<div className="cell-msg">
+				    			{form[formName][nameMsg]}
+				    		</div> : null
+		    			}
 		    		</div>
 		    	</div>);
 	}
@@ -178,25 +160,46 @@ class Form extends Component{
 	constructor(props){
 		super(props);
 	}
+	
+	componentDidMount(){
+		let { name, formName , verify} = this.props;
+		this.props.actions.formInit({formName, name, verify});
+	}
+
+	verify(value){
+		let { name, formName, form } = this.props;
+		this.props.actions.formChange({name,formName,form,value})
+	}
 
 	getVerifyObg(){
 		let name = this.props.name;
-		let nameStatus = name + '_status';
-		let nameVerify = name + '_verify';
-		let nameMsg = name + '_msg';
-		return {nameStatus,nameVerify,nameMsg}
+		let nameStatus = name + '___status',
+	        nameVerify = name + '____verify',
+	        nameMsg = name + '____msg',
+	        nameRule = name + '____rule';
+		return {nameStatus,nameVerify,nameMsg,nameRule}
 	}
 
   	render() {
-	 	// let _props = {};
-		// let excludedProps = ['type'];
-		// Object.keys(this.props).map(name => excludedProps.includes(name) ? '' : _props[name] = this.props[name]);
+  		let { form,formName } = this.props;
+  		if(!form[formName]) return null;
 
-		let _props = Object.assign({},this.props,{className:classNames('form-cell',this.props.className)},this.getVerifyObg());
-		switch(this.props.type){
+	 	let _props = {};
+		let excludedProps = ['actions','verify'];
+		Object.keys(this.props).map(name => excludedProps.includes(name) ? '' : _props[name] = this.props[name]);
+
+		let { nameStatus, nameVerify} = this.getVerifyObg();
+		let hasError = form[formName][nameStatus] && !form[formName][nameVerify];
+		_props = Object.assign(_props,{
+			className: classNames('form-cell',{hasError: hasError},this.props.className),
+			handleChange: this.verify.bind(this),
+			hasError: hasError
+		},this.getVerifyObg());
+
+		switch(_props.type){
 			case 'password':
 			case 'text':
-				return <Input {..._props} type={this.props.type}/>;
+				return <Input {..._props} />;
 			case 'radio':
 				return <Radio {..._props} />;
 			case 'area':
@@ -208,29 +211,24 @@ class Form extends Component{
 	}
 }
 
+Form.propTypes = {
+	type: React.PropTypes.string.isRequired,
+	formName: React.PropTypes.string.isRequired,
+	name: React.PropTypes.string.isRequired,
+};
+
 function mapStateToProps(state) {
 	return {
 		form: state.form
 	}
 }
 
-function formSet(data){
-	return dispatch => {
-		dispatch({type:'from-set',data});
-	}
-}
-
 function mapDispatchToProps(dispatch) {
 	let boundActionCreators = bindActionCreators({
-		formSet
+		formInit,formChange
 	}, dispatch);
 	return {actions: boundActionCreators};
 }
-
-
-
-
-
 
 export default connect(mapStateToProps,mapDispatchToProps)(Form);
 

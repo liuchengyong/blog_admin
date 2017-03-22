@@ -2,12 +2,12 @@ let defaults = {
 	
 };
 
-let sidebar = (state = defaults, action) => {
+let path = (state = defaults, action) => {
     switch (action.type) {
-        case 'init_sidebar':
+        case 'set_path':
             return Object.assign({},state,action.data);
         default:
             return state;
     }
 }
-export default sidebar;
+export default path;

@@ -1,144 +1,136 @@
-.form-cell{
-	position: relative;
-	display: block;
-	padding: 10px 15px;
-	font-size: 14px;
-	.cell-hd{
-		line-height: 30px;
-	}
-	.cell-bd{
-		position: relative;
-		flex:1;
-		padding: 0;
-		&.has-before-icon{
-			input{
-				padding-left: 34px;
-			}
-			.before-icon{
-				top:0;
-				left: 0;
-			}	
-		}
-		&.has-after-icon{
-			input{
-				padding-right: 34px;
-			}
-			.after-icon{
-				top:0;
-				right: 0;
-			}		
-		}
-		.before-icon,.after-icon{
-			position: absolute;
-			width: 34px;
-			height: 30px;
-			line-height: 30px;
-			text-align: center;
-			color: #555;
-		}
-
-	}
-	.cell-ft{
-		
-	}
-	.cell-msg{
-		width: 100%;
-		line-height: 24px;
-		font-size: 80%;
-	}
-	input{
-		border:1px solid #ccc;
-		outline: none;
-		border-radius: 5px;
-		height: 30px;
-		padding: 0 15px;
-		width: 100%;
-		color:#666;
-	}
-	input[readonly]{
-		background-color: #eee;
-		cursor: not-allowed;
-	}
-	.cell-radio{
-		display: block;
-		line-height: 30px;
-		padding: 0 15px;
-		i{
-			margin-right: 15px;
-		}
-	}
-	.fa-red{
-		color:red;
-	}
-	textarea{
-		width: 100%;
-		border:1px solid #ccc;
-		border-radius: 5px;
-		outline: none;
-		padding: 8px 15px;
-		min-height: 80px;
-		max-width: 100%;
-	}
-
+.form-cell {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    font-size: 14px;
+    .cell-hd {
+        line-height: 30px;
+    }
+    .cell-bd {
+        position: relative;
+        flex: 1;
+        padding: 0;
+        &.has-before-icon {
+            input {
+                padding-left: 34px;
+            }
+            .before-icon {
+                top: 0;
+                left: 0;
+            }
+        }
+        &.has-after-icon {
+            input {
+                padding-right: 34px;
+            }
+            .after-icon {
+                top: 0;
+                right: 0;
+            }
+        }
+        .before-icon,
+        .after-icon {
+            position: absolute;
+            width: 34px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            color: #555;
+        }
+    }
+    .cell-ft {}
+    .cell-msg {
+        clear: both;
+        width: 100%;
+        line-height: 24px;
+        font-size: 80%;
+    }
+    input {
+        border: 1px solid #ccc;
+        outline: none;
+        border-radius: 5px;
+        height: 30px;
+        padding: 0 15px;
+        width: 100%;
+        color: #666;
+    }
+    input[readonly] {
+        background-color: #eee;
+        cursor: not-allowed;
+    }
+    .cell-radio {
+        display: block;
+        line-height: 30px;
+        padding: 0 15px;
+        i {
+            margin-right: 15px;
+        }
+        .fa-check {
+            color: #1f96ec;
+        }
+    }
+    textarea {
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        outline: none;
+        padding: 8px 15px;
+        min-height: 80px;
+        max-width: 100%;
+    }
 }
 
-.form-cell.form-horizontal{
-	display: flex;
-	.cell-hd{
-		padding: 0 15px;
-		text-align: center;
-	}
-	.cell-bd{
-		padding: 0;
-		flex:1;
-	}
-	.cell-ft{
-		min-width: 50px;
-	}
-	.cell-radio{
-		float: left;
-		padding: 0 30px 0 15px;
-		i{
-			margin-right: 10px;
-		}
-	}
+.form-cell.form-horizontal {
+    display: flex;
+    .cell-hd {
+        padding: 0 15px;
+        text-align: center;
+    }
+    .cell-bd {
+        padding: 0;
+        flex: 1;
+    }
+    .cell-ft {
+        min-width: 50px;
+    }
+    .cell-radio {
+        float: left;
+        padding: 0 30px 0 15px;
+        i {
+            margin-right: 10px;
+        }
+    }
 }
 
-.form-cell.form-block{
-	padding: 10px 0;
-	input{
-		height: 34px;
-	}
-	.cell-bd{
-
-		.before-icon,.after-icon{
-			height: 34px;
-			line-height: 34px;
-		}
-	}
-	
+.form-cell.form-block {
+    padding: 10px 0;
+    input {
+        height: 34px;
+    }
+    .cell-bd {
+        .before-icon,
+        .after-icon {
+            height: 34px;
+            line-height: 34px;
+        }
+    }
 }
 
-.form-cell.hasError{
-	color: #fe5951;
-	input{
-		-webkit-box-shadow: 0 0 0px 1000px #ffe5e5 inset;
-		background-color: #ffe5e5;
-	}
+.form-cell.hasError {
+    color: #fe5951;
+    input {
+        -webkit-box-shadow: 0 0 0px 1000px #ffe5e5 inset;
+        background-color: #ffe5e5;
+    }
+    textarea {
+        background-color: #ffe5e5;
+    }
+    .date-picker-value{
+    	background-color: #ffe5e5;
+    }
 }
+
 input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px white inset;
-    color:#666 !important;
+    color: #666 !important;
 }
-
-
-
-
-
-
-
-
-
-
-
-

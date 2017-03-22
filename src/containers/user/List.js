@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux'
 
 import DataTable from 'components/DataTable';
 
-import getSideBarAction from 'actions/getSideBarAction';
 
 
 class Home extends Component{
@@ -21,8 +20,12 @@ class Home extends Component{
     }
 
     let dataTable = {
+      type:'remote',
+      url:'/blog/user/getAll',
       search:true,
       page:true,
+      length:true,
+      info:true,
       header:[
         { 
           clomn:'id',
@@ -34,26 +37,40 @@ class Home extends Component{
         },
         { 
           clomn:'sex',
-          name:'性别'
+          name:'性别',
+          format:(data)=>{
+            return data.sex == 1 ? '男' : '女';
+          },
         },
         { 
-          clomn:'age',
-          name:'年龄'
+          clomn:'address',
+          name:'地址',
         },
         { 
-          clomn:'weight',
-          name:'体重'
+          clomn:'description',
+          name:'简介',
+          default:'暂无',
         },
+        { 
+          clomn:'email',
+          name:'email'
+        },
+        {
+          name:'操作',
+          format:(data)=>{
+            return <div>
+              <button className='btn-sm btn-caution'>删除</button>
+              <button className='btn-sm btn-action'>编辑</button>
+            </div>
+          }
+        }
       ],
       data:list
     };
 
     return ( 
-        <div className="home-container">
-        	<ContainerLeft {...this.props} />
-          <ContainerRight>
-            <DataTable {...dataTable}/>
-          </ContainerRight>
+        <div className="container-user-list">
+        	<DataTable {...dataTable}/>
         </div>);
   }
 }
@@ -66,7 +83,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
 	let boundActionCreators = bindActionCreators({
-		getSideBarAction:getSideBarAction
+		
 	}, dispatch);
 
 	return {actions: boundActionCreators};

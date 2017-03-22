@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import classNames from 'commons/ClassNames';
-import { loginAction} from 'actions/login';
+import { userLogin} from 'actions/user';
 import { hideModel} from 'actions/model';
 import { setUser} from 'actions/user';
 
@@ -22,9 +22,7 @@ class Login extends Component{
 				{type:'null',msg:'请输入手机号，手机号不能为空'},
 	    		{type:'reg',reg:/^1\d{10}$/,msg:'手机号格式不正确，请输入正确的手机号'}
 			],
-			password:[
-				{type:'null',msg:'请输入密码，密码不能为空'}
-			]
+			password: {type:'null',msg:'请输入密码，密码不能为空'}
 		}
 	}
 
@@ -40,11 +38,8 @@ class Login extends Component{
 	}
 
 	handleToLogin(){
-
-		console.log(this.props.form)
-		// let password = this.refs.password.value;
-		// let phone = this.refs.count.value;
-		// this.props.actions.loginAction({password,phone});
+		let {form,formName="login"} = this.props;
+		this.props.actions.userLogin({formName,form});
 	}
 
 	componentWillReceiveProps(nextProps){
@@ -53,6 +48,7 @@ class Login extends Component{
 			router.push('/');
 		}
 	}
+
 	handleEvent(){
 		this.props.actions.hideModel();
 	}
@@ -60,24 +56,19 @@ class Login extends Component{
   	render() {
   		let { user, loading, model, form} = this.props;
   		let { count, password} = this.state;
-  		console.log(form);
 	    return (<div className="login-container">
-	    	<Loading type={loading.type} content={loading.content} hide={loading.isHide}/>
-            <Model hide={model.isHide} content={model.content} handleEvent={this.handleEvent.bind(this)} />
-
         	<form>
         		<h1 className="from-title">三根半·夜</h1>
 
         		 <Form className="form-horizontal form-block"
-        		 	formObj = 'login' name = "count"
+        		 	formName = 'login' name = "count"
         		 	type = "text" 
                   	placeholder = "请输入手机号" 
                   	iconBefore = "fa fa-user" iconAfter = "fa fa-close"
-                  	verify = {this.verifys.count}
-                  	focus = {true}/>
+                  	verify = {this.verifys.count} />
 
                 <Form className="form-horizontal form-block"
-                	formObj = 'login' name = "password"
+                	formName = 'login' name = "password"
         		 	type = "password" 
                   	placeholder = "请输入密码" 
                   	iconBefore = "fa fa-lock"
@@ -104,7 +95,7 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
 	let boundActionCreators = bindActionCreators({
-		loginAction,hideModel,setUser
+		userLogin,hideModel,setUser
 	}, dispatch);
 	return {actions: boundActionCreators};
 }

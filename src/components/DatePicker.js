@@ -26,16 +26,19 @@ class Day extends Component{
 		}
 		return rows;
 	}
-	selectDate(day){
-		let {year,mouth} = this.props;
-		this.props.select(new Date(year,mouth-1,day));
+	selectDate(event){
+		let dom = event.target;
+		if(dom.className.includes('item')){
+			let {year,mouth} = this.props;
+			this.props.select(new Date(year,mouth-1,dom.dataset.value));
+		}
 	}
 	render(){
 		let {days,day,isShow} = this.props;
 		if(!isShow) return null;
 		let rows = this.createDay();
 
-		return (<table className="date-picker-days">
+		return (<table className="date-picker-days" onClick={this.selectDate.bind(this)}>
 				<thead>
 	    			<tr>
 	    				{
@@ -49,8 +52,8 @@ class Day extends Component{
 	    					return 	<tr key={index}>
 			    						{
 			    							list.map((value,index) => value ? 
-			    								<td key={index} onClick={this.selectDate.bind(this,value)} className={ day == value ? 'current' : ''} > {value} </td> : 
-			    								<td key={index}>{value}</td> )
+			    								<td key={index} data-value={value} className={ day == value ? 'current item' : 'item'} > {value} </td> : 
+			    								<td key={index}>{value}</td>)
 			    						}
 		    						</tr>;
 	    				})
@@ -129,7 +132,7 @@ class DatePicker extends Component{
 			</div>
 			{
 				this.state.isShow ? 
-				<div className="date-picker-box"  >
+				<div className="date-picker-box">
 					<div className="date-picker-header">
 						<button className="btn-sm" onClick={this.changeYear.bind(this,'minus')}><i className="fa fa-angle-double-left"></i></button>
 						<button className="btn-sm" onClick={this.changeMouth.bind(this,'minus')}><i className="fa fa-angle-left"></i></button>

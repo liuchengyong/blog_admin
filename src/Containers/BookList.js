@@ -1,9 +1,0 @@
-import React, {Component} from 'react'
-
-class Index extends Component{
-  render() {
-    return (<h1>i am BookList</h1>);
-  }
-}
-
-export default Index
